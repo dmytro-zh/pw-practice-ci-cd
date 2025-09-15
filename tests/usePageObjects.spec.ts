@@ -1,4 +1,5 @@
 import {test, expect} from '@playwright/test'
+import { argosScreenshot } from "@argos-ci/playwright";
 import { PageManager } from '../page-objects/pageManager'
 import { faker } from '@faker-js/faker'
 
@@ -31,4 +32,12 @@ test('paprametrized methods', async({page}) => {
     // await pm.navigateTo().datePickerPage()
     // await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(10)
     // await pm.onDatepickerPage().selectDatePickerWithRangeFromToday(6, 9)
+})
+
+test.only('esting with argos ci', async({page}) => {
+    const pm = new PageManager(page)
+    await pm.navigateTo().formLayoutsPage()
+    await argosScreenshot(page, "form layouts page");
+    await pm.navigateTo().datePickerPage()
+    await argosScreenshot(page, "date picker page");
 })
